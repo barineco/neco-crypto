@@ -1,0 +1,44 @@
+[package]
+name = "neco-vault"
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.82"
+license = "MIT"
+description = "minimum dependency memory-only signing vault built on neco-secp"
+repository = "https://github.com/barineco/neco-crypto"
+readme = "README.md"
+documentation = "https://docs.rs/neco-vault"
+keywords = ["vault", "signing", "nostr", "crypto"]
+categories = ["cryptography"]
+
+[features]
+default = ["std", "nostr", "getrandom"]
+std = ["alloc", "neco-secp/std", "neco-argon2?/std", "neco-sha2?/std"]
+alloc = ["neco-secp/alloc"]
+getrandom = ["dep:getrandom", "neco-secp/getrandom"]
+nostr = ["alloc", "neco-secp/nostr"]
+nip04 = ["alloc", "neco-secp/nip04"]
+nip44 = ["alloc", "neco-secp/nip44"]
+nip17 = ["nip44", "nostr"]
+dm-epoch = ["nip44", "dep:neco-sha2", "dep:chacha20poly1305"]
+encrypted = ["alloc", "dep:neco-argon2", "dep:chacha20poly1305", "dep:zeroize"]
+legacy-migration = ["encrypted", "dep:aes", "dep:cbc", "dep:salsa20", "dep:neco-sha2"]
+security-hardening = ["alloc"]
+wasm = ["getrandom", "getrandom/js"]
+
+[dependencies]
+neco-secp = { version = "0.2", path = "../neco-secp", default-features = false }
+neco-argon2 = { version = "0.2", path = "../neco-argon2", default-features = false, features = ["alloc"], optional = true }
+aes = { version = "0.8", optional = true, default-features = false }
+cbc = { version = "0.1", optional = true, default-features = false, features = ["block-padding"] }
+getrandom = { version = "0.2", optional = true, default-features = false }
+neco-sha2 = { version = "0.2", path = "../neco-sha2", optional = true, default-features = false }
+chacha20poly1305 = { version = "0.10", optional = true, default-features = false }
+salsa20 = { version = "0.10", optional = true, default-features = false, features = ["zeroize"] }
+zeroize = { version = ">=1.8.2, <1.9", optional = true, default-features = false, features = ["alloc"] }
+
+[lib]
+path = "src/lib.rs"
+
+[target.'cfg(all(target_arch = "wasm32", target_os = "unknown"))'.dependencies]
+getrandom = { version = "0.2", default-features = false, optional = true, features = ["js"] }

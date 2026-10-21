@@ -1,0 +1,17 @@
+[package]
+name = "neco-sha1"
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.82"
+license = "MIT"
+description = "zero dependency SHA-1 hash function"
+repository = "https://github.com/barineco/neco-crypto"
+readme = "README.md"
+keywords = ["sha1", "crypto", "hash"]
+categories = ["cryptography"]
+
+[features]
+default = ["std"]
+std = []
+
+[dependencies]

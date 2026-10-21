@@ -1,0 +1,18 @@
+[package]
+name = "neco-sha2"
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.82"
+license = "MIT"
+description = "zero dependency SHA-256, HMAC-SHA256, HKDF-SHA256, and RFC 6979 deterministic nonce derivation"
+repository = "https://github.com/barineco/neco-crypto"
+readme = "README.md"
+keywords = ["sha256", "hmac", "hkdf", "crypto"]
+categories = ["cryptography"]
+
+[features]
+default = ["std"]
+std = ["alloc"]
+alloc = []
+
+[dependencies]

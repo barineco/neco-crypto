@@ -1,0 +1,12 @@
+[workspace]
+resolver = "2"
+members = [
+    "neco-sha1",
+    "neco-sha2",
+    "neco-base64",
+    "neco-p256",
+    "neco-secp",
+    "neco-argon2",
+    "neco-vault",
+    "neco-nostr-wasm",
+]

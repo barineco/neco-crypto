@@ -1,0 +1,19 @@
+[package]
+name = "neco-base64"
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.81"
+license = "MIT"
+description = "zero dependency Base64 encoder and decoder"
+repository = "https://github.com/barineco/neco-crypto"
+readme = "README.md"
+documentation = "https://docs.rs/neco-base64"
+keywords = ["base64", "base64url", "encoding", "decoder"]
+categories = ["encoding"]
+
+[features]
+default = ["std"]
+std = ["alloc"]
+alloc = []
+
+[dependencies]
